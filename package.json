@@ -1,0 +1,24 @@
+{
+  "name": "bugs-tracker",
+  "version": "1.0.0",
+  "description": "Web app to track your annoying bugs. Please test your code before deployment so you don't need to visit this site often.",
+  "main": "index.js",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.5.0",
+    "mongoose": "^6.4.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.18"
+  },
+  "scripts": {
+    "start": "nodemon server/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
