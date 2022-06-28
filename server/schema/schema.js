@@ -1,4 +1,5 @@
-const { projects, clients } = require("../sample-data");
+const Project = require("../models/Project");
+const Client = require("../models/Client");
 const {
   GraphQLObjectType,
   GraphQLID,
@@ -26,12 +27,12 @@ const ProjectType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
-    client : {
-        type: ClientType,
-        resolve(parent, args) {
-            return clients.find(client => client.id === parent.clientId);
-        }
-    }
+    client: {
+      type: ClientType,
+      resolve(parent, args) {
+        return Client.findById(parent.id)
+      },
+    },
   }),
 });
 
@@ -41,7 +42,7 @@ const RootQuery = new GraphQLObjectType({
     clients: {
       type: new GraphQLList(ClientType),
       resolve(parent, args) {
-        return clients;
+        return Client.find();
       },
     },
     client: {
@@ -50,24 +51,24 @@ const RootQuery = new GraphQLObjectType({
         id: { type: GraphQLID },
       },
       resolve(parent, args) {
-        return clients.find((client) => client.id === args.id);
+        return Client.findById(args.id);
       },
     },
     projects: {
-        type: new GraphQLList(ClientType),
-        resolve(parent, args) {
-          return projects;
-        },
+      type: new GraphQLList(ClientType),
+      resolve(parent, args) {
+        return Project.find();
       },
-      project: {
-        type: ProjectType,
-        args: {
-          id: { type: GraphQLID },
-        },
-        resolve(parent, args) {
-          return projects.find((client) => client.id === args.id);
-        },
+    },
+    project: {
+      type: ProjectType,
+      args: {
+        id: { type: GraphQLID },
       },
+      resolve(parent, args) {
+        return Project.findById(args.id);
+      },
+    },
   },
 });
 
