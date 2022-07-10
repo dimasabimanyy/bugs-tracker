@@ -13,6 +13,8 @@ connectDb();
 
 app.use(cors());
 
+app.use(express.json());
+
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -20,5 +22,7 @@ app.use(
     graphiql: process.env.NODE_ENV === "DEVELOPMENT",
   })
 );
+
+app.use("/api/auth", require("./routes/auth"));
 
 app.listen(port, console.log(`Server started on port ${port}`));
