@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const ErrorResponse = require("../utils/errorResponse");
 
 exports.register = async (req, res, next) => {
   try {
@@ -15,7 +16,7 @@ exports.register = async (req, res, next) => {
       user,
     });
   } catch (e) {
-    res.status(500).json({ success: false, message: e.message });
+    next(e);
   }
 };
 
@@ -23,17 +24,14 @@ exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    res.status(400).json({
-      success: false,
-      error: `Please provide ${!email ? "an email" : "a password"}`,
-    });
+    return next(new ErrorResponse(`Please provide ${!email ? "an email" : "a password"}`, 401))
   }
 
   try {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      res.status(404).json({ success: false, error: "Invalid credentials" });
+        return next(new ErrorResponse(`Invalid credentials`, 401))
     }
 
     const isMatch = await user.matchPasswords(password);
@@ -48,7 +46,7 @@ exports.login = async (req, res, next) => {
       token: "kratos sdfalkj",
     });
   } catch (e) {
-    res.status(500).json({ success: false, error: e.message });
+    next(e)
   }
 };
 
