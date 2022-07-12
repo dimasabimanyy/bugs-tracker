@@ -7,6 +7,8 @@ const cors = require("cors");
 const port = process.env.PORT || 5000;
 const connectDb = require("./config/db");
 const errorHandler = require("./middleware/error");
+const authRoute = require("./routes/auth");
+const privateRoute = require("./routes/private");
 
 const app = express();
 
@@ -24,7 +26,8 @@ app.use(
   })
 );
 
-app.use("/api/auth", require("./routes/auth"));
+app.use("/api/auth", authRoute);
+app.use("/api/private", privateRoute);
 
 // Error handler should be the last piece of middleware
 app.use(errorHandler);
