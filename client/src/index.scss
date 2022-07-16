@@ -1,0 +1,69 @@
+$dark-font: #212529;
+$dark-purple: #5E57F4;
+$dark-purple-hover: #322fdc;
+$white: #FFF;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  font-size: .85rem;
+  color: $dark-font;
+}
+
+// SIZING, PADING, MARGIN
+.no-mb {
+  margin-bottom: 0 !important;
+}
+
+.b-500 {
+  font-weight: 500 !important;
+}
+
+.b-600 {
+  font-weight: 500 !important;
+}
+
+.br-2 {
+  border-radius: 2px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.reset-anchor {
+  text-decoration: none;
+  color: $dark-font;
+}
+
+// BUTTONS
+.btn-full {
+  width: 100%;
+  padding: .9rem .8rem;
+  background-color: $dark-purple;
+  border: 1px solid $dark-purple;
+  border-radius: 2px;
+  color: $white;
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .2px;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    background-color: $dark-purple-hover;
+    border: 1px solid $dark-purple-hover;
+  }
+}
